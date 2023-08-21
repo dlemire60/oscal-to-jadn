@@ -1,0 +1,49 @@
+Trying to grok the Catalog metaschema. At the top level you've got (vastly simplifying their syntax):
+
+<define-assembly>"catalog"
+    <define-flag>"uuid"  (with a bunch of properties that I guess are for the tooling, don't show in JSON schema)
+    <model>
+        <assembly>"metadata" (imported from common metadata Metaschema)
+        <assembly>"parameter" (an array of parameters)
+        <assembly>"control" (an array of controls)
+        <assembly>"group" (an array of groups)
+        <assembly>"back-matter"
+    </model>
+    <contraint>(a couple of "allowed values" constraints, and six Index definitions)
+</define-assembly>
+
+<define-assembly>"group"
+    <define-flag>"id" (this one is a Token, because "assigned and managed externally by humans.")
+    <define-flag>"class" (another Token)
+    <model>
+        <assembly>"parameter" (an array of parameters)
+        <define-field>"title"
+        <assembly>"parameter" (an array of parameters)
+        <assembly>"property" (an array of properties)
+        <assembly>"link" (an array of links)
+        <assembly>"part" (an array of parts)
+        <choice>
+            <assembly>"group" (an array of groups)
+            <assembly>"control" (an array of controls)
+    </model>
+    <contraint>(a couple of "allowed values" constraints)
+</define-assembly>
+
+<define-assembly>"control"
+    <define-flag>"id" (this one is a Token, because externally-managed)
+    <define-flag>"class"
+    <model>
+        <define-field>"title"
+        <assembly>"parameter" (an array of parameters)
+        <assembly>"property" (an array of properties)
+        <assembly>"link" (an array of links)
+        <assembly>"part" (an array of parts)
+        <assembly>"control" (an array of controls)
+    </model>
+
+
+
+        
+    
+        
+    

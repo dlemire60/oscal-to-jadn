@@ -1,4 +1,14 @@
-Trying to grok the Catalog metaschema. At the top level you've got (vastly simplifying their syntax):
+Trying to grok the Catalog metaschema. Below is the top level structure 
+(vastly simplifying their syntax). This model defines assemblies for Catalog, 
+Group, and Control. Part, Parameter, and Control-related constructs are 
+imported from control-common metaschema. Metadata, back-matter, and several 
+"utility", constructs are imported from the metadata metaschema. At first blush,
+Constraints are hard to understand.
+
+
+<import href="oscal_control-common_metaschema.xml"/>
+<import href="oscal_metadata_metaschema.xml"/>
+
 
 <define-assembly>"catalog"
     <define-flag>"uuid"  (with a bunch of properties that I guess are for the tooling, don't show in JSON schema)
@@ -39,11 +49,5 @@ Trying to grok the Catalog metaschema. At the top level you've got (vastly simpl
         <assembly>"link" (an array of links)
         <assembly>"part" (an array of parts)
         <assembly>"control" (an array of controls)
-    </model>
-
-
-
-        
-    
-        
-    
+    </model>  
+    <contraint>(a large number of "allowed values" constraints, an index definition, several "expected values")

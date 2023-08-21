@@ -1160,19 +1160,19 @@
 
         "oscal-catalog-oscal-metadata:link": {
             "title": "Link",
-            "description": "A reference to a local or remote resource, that has a specific relation to the containing object.",
+            "description": "",
             "$id": "#assembly_oscal-metadata_link",
             "type": "object",
             "properties": {
                 "href": {
                     "title": "Hypertext Reference",
-                    "description": "A resolvable URL reference to a resource.",
+                    "description": "",
                     "$ref": "#/definitions/URIReferenceDatatype"
                 },
 
                 "rel": {
                     "title": "Link Relation Type",
-                    "description": "Describes the type of relationship provided by the link's hypertext reference. This can be an indicator of the link's purpose.",
+                    "description": "",
                     "anyOf": [
                         {
                             "$ref": "#/definitions/TokenDatatype"
@@ -1180,7 +1180,7 @@
 
                         {
                             "enum": [
-                                "reference"
+                                ""
                             ]
                         }
                     ]
@@ -1456,40 +1456,6 @@
             "$ref": "#/definitions/EmailAddressDatatype"
         },
 
-        "oscal-catalog-oscal-metadata:telephone-number": {
-            "title": "Telephone Number",
-            "description": "A telephone service number as defined by ITU-T E.164.",
-            "$id": "#field_oscal-metadata_telephone-number",
-            "type": "object",
-            "properties": {
-                "type": {
-                    "title": "type flag",
-                    "description": "Indicates the type of phone number.",
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/StringDatatype"
-                        },
-
-                        {
-                            "enum": [
-                                "home",
-                                "office",
-                                "mobile"
-                            ]
-                        }
-                    ]
-                },
-
-                "number": {
-                    "$ref": "#/definitions/StringDatatype"
-                }
-            },
-
-            "required": [
-                "number"
-            ],
-            "additionalProperties": false
-        },
 
         "oscal-catalog-oscal-metadata:address": {
             "title": "Address",
@@ -1552,7 +1518,7 @@
 
         "oscal-catalog-oscal-metadata:addr-line": {
             "title": "Address line",
-            "description": "A single line of an address.",
+            "description": "",
             "$id": "#field_oscal-metadata_addr-line",
             "$ref": "#/definitions/StringDatatype"
         },
@@ -1591,23 +1557,6 @@
         },
 
 
-
-
-
-        "EmailAddressDatatype": {
-            "description": "An email address string formatted according to RFC 6531.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/StringDatatype"
-                },
-
-                {
-                    "type": "string",
-                    "format": "email",
-                    "pattern": "^.+@.+$"
-                }
-            ]
-        },
 
 
 

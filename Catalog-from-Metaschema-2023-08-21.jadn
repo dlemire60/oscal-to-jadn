@@ -1,0 +1,30 @@
+{
+  "info": {
+    "title": "OSCAL-Catalog-from-metaschema",
+    "package": "http://csrc.nist.gov/ns/oscal/1.0",
+    "comment": "developing JADN schema working back from OSCAL Catalog metaschema"
+  },
+  "types": [
+    ["Catalog", "Record", [], "A structured, organized collection of control information.", [
+    [1, "uuid", "String", [], "Provides a globally unique means to identify a given catalog instance."],
+    [2, "metadata", "Metadata", [], ""],
+    [3, "parameter", "ArrayOf", ["*Parameter"], ""],
+    [4, "control", "ArrayOf", ["*Control"], ""],
+    [5, "group", "ArrayOf", ["*Group"], ""],
+    [6, "back_matter", "Back-Matter", [], ""]
+  ]],
+    ["Metadata", "Record", [], "", []],
+    ["Group", "Record", [], "", [
+    [1, "id", "Token", [], "Identifies the group for the purpose of cross-linking within the defining instance or from other instances that reference the catalog."],
+    [2, "class", "Token", [], ""],
+    [3, "title", "String", [], ""],
+    [4, "parameter", "ArrayOf", ["*Parameter"], ""],
+    [5, "property", "ArrayOf", ["*Property"], ""],
+    [6, "link", "ArrayOf", ["*Link"], ""],
+    [7, "part", "ArrayOf", ["*Part"], ""]
+  ]],
+    ["Control", "Record", [], "", []],
+    ["Back-Matter", "Record", [], "", []],
+    ["Token", "String", [], ""]
+  ]
+}

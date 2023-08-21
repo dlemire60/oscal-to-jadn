@@ -1450,40 +1450,6 @@
         },
 
 
-        "oscal-catalog-oscal-metadata:document-id": {
-            "title": "Document Identifier",
-            "description": "A document identifier qualified by an identifier scheme.",
-            "$id": "#field_oscal-metadata_document-id",
-            "type": "object",
-            "properties": {
-                "scheme": {
-                    "title": "Document Identification Scheme",
-                    "description": "Qualifies the kind of document identifier using a URI. If the scheme is not provided the value of the element will be interpreted as a string of characters.",
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/URIDatatype"
-                        },
-
-                        {
-                            "enum": [
-                                "http://www.doi.org/"
-                            ]
-                        }
-                    ]
-                },
-
-                "identifier": {
-                    "$ref": "#/definitions/StringDatatype"
-                }
-            },
-
-            "required": [
-                "identifier"
-            ],
-            "additionalProperties": false
-        },
-
-
 
 
 

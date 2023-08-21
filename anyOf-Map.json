@@ -1,0 +1,22 @@
+"type": {
+    "title": "type flag",
+    "description": "Indicates the type of phone number.",
+    "anyOf": [
+        {
+            "$ref": "#/definitions/StringDatatype"
+        },
+        {
+            "enum": [
+                "home",
+                "office",
+                "mobile" ] } ] }
+
+
+Phone-Line-Type = Map{1..*}
+  1 ref StringDataType
+  2 selection Phone-Type-List
+
+Phone-Type-List = Enumerated
+  1 "home"
+  2 "office"
+  3 "mobile"

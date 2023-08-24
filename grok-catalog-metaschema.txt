@@ -6,7 +6,7 @@ imported from control-common metaschema. Metadata, back-matter, and several
 Constraints are hard to understand.
 
 
-<import href="oscal_control-common_metaschema.xml"/>
+<import href="oscal_metadata_metaschema.xml"/>
 
 //****************************************************************************//
 //*************  structures from the Metadata metaschema *********************//
@@ -19,6 +19,7 @@ Constraints are hard to understand.
 
 
 
+<import href="oscal_control-common_metaschema.xml"/>
 
 //****************************************************************************//
 //**********  structures from the Control Common metaschema ******************//
@@ -106,8 +107,6 @@ Constraints are hard to understand.
 
 
 
-
-<import href="oscal_metadata_metaschema.xml"/>
 
 //****************************************************************************//
 //**************  Structures from the Catalog metaschema *********************//

@@ -9,6 +9,18 @@ Constraints are hard to understand.
 <import href="oscal_control-common_metaschema.xml"/>
 
 //****************************************************************************//
+//*************  structures from the Metadata metaschema *********************//
+//****************************************************************************//
+
+<define-assembly>"metadata"  (complex structure, common to all OSCAL layers, TBSL)
+
+<define-assembly>"back-matter"  (complex structure, common to all OSCAL layers, TSBL)
+
+
+
+
+
+//****************************************************************************//
 //**********  structures from the Control Common metaschema ******************//
 //****************************************************************************//
 

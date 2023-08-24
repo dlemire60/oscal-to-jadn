@@ -98,7 +98,7 @@ Constraints are hard to understand.
 <import href="oscal_metadata_metaschema.xml"/>
 
 //****************************************************************************//
-//**************  structures from the Catalog metaschema *********************//
+//**************  Structures from the Catalog metaschema *********************//
 //****************************************************************************//
 
 <define-assembly>"catalog"

@@ -62,6 +62,35 @@ Constraints are hard to understand.
 </define-assembly>
 
 
+<define-assembly>"parameter-guideline"
+    <model>
+        <define-field>"prose" (markup-multiline)
+    </model>
+</define-assembly>
+
+
+<define-field>"parameter-value"  (no additional information with this)
+
+
+<define-assembly>"parameter-selection"
+    <define-flag>"how-many" (token)
+        <constraint>
+            <allowed-values>
+                <enum>"one"
+                <enum>"one-or-more"
+            </allowed-values>
+        </constraint>
+    <define-flag>
+    <model>
+        <define-field>"choice" (array of markup-line)
+    </model>
+<define-assembly>
+
+
+<define-flag>"control-id" (token)
+
+
+<define-assembly>"include-all"  (what does this construct actually do??????)
 
 
 

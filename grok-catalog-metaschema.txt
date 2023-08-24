@@ -7,8 +7,70 @@ Constraints are hard to understand.
 
 
 <import href="oscal_control-common_metaschema.xml"/>
+
+//****************************************************************************//
+//**********  structures from the Control Common metaschema ******************//
+//****************************************************************************//
+
+<define-assembly>"part"
+    <define-flag>"id" (Token, because intended to be human-readable)
+    <define-flag>"name" (token)
+    <define-flag>"ns" (URI -- optional namespace for the part)
+    <define-flag>"class" (token -- provides sub-type or category)
+    <model>
+        <define-field>"title (markup-line)
+        <assembly>"props" (an array of property)
+        <define-field>"prose" (markup-multiline)
+        <assembly>"parts" (array of part)
+        <assembly>"link" (an array of links)
+    </model>
+    <contraint>(an "allowed values" constraint)
+</define-assembly>
+
+
+<define-assembly>"parameter"
+    <define-flag>"id" (Token, because intended to be human-readable)
+    <define-flag>"class" (token -- provides sub-type or category)
+    <define-flag>"depends-on" (token -- deprecated)
+    <model>
+        <assembly>"props" (an array of property)
+        <assembly>"link" (an array of links)
+        <define-field>"label" (markup-line)
+        <define-field>"usage" (markup-multiline)
+        <assembly>"constraints" (array of parameter-constraint)
+        <assembly>"guidelines" (array of parameter-guideline)
+        <choice>
+            <field>"values" (array of parameter-value)
+            <assembly>"select" (parameter-selection)
+        </choice>
+        <field>"remarks"
+    </model>
+    <contraint>(a couple of "allowed values" constraints, and an expected target)
+</define-assembly>
+
+
+<define-assembly>"parameter-constraint"
+    <model>
+        <define-field>"description" (markup-multiline)
+        <define-assembly>"tests" (array of test)
+            <model>
+                <define-field>"expression" (string)
+                <field>"remarks"
+            </model>
+        </define-assembly>
+    </model>
+</define-assembly>
+
+
+
+
+
+
 <import href="oscal_metadata_metaschema.xml"/>
 
+//****************************************************************************//
+//**************  structures from the Catalog metaschema *********************//
+//****************************************************************************//
 
 <define-assembly>"catalog"
     <define-flag>"uuid"  (with a bunch of properties that I guess are for the tooling, don't show in JSON schema)

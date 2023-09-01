@@ -47,6 +47,19 @@ Constraints are hard to understand.
                 <field>remarks
             </model>
         </define-assembly>
+        <define-assembly>locations ArrayOf(location)
+            <flag>uuid
+            <model>
+                <field>title (markup-line)
+                <assembly>address
+                <field>email-addresses ArrayOf(email-address)
+                <field>telephone-numbers ArrayOf(telephone-number)
+                <field>urls ArrayOf(url)
+                <field>props ArrayOf(property)
+                <field>links ArrayOf(link)
+                <field>remarks
+            <model>
+        </define-assembly>
     </model>
 </define-assembly>
 

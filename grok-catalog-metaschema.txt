@@ -19,18 +19,34 @@ Constraints are hard to understand.
         <field>last-modified
         <field>version
         <field>oscal-version
-        <assembly>revisions
-            <array-of>
+        <define-assembly>revisions
+            <model>
+                <array-of>
+                    <field>title (markup-line)
+                    <field>published
+                    <field>last-modified
+                    <field>version
+                    <field>oscal-version
+                    <assembly>props ArrayOf(property)
+                    <assembly>links ArrayOf(link)
+                    <field>remarks
+                </array-of>
+            </model>
+        </define-assembly>
+        <field>document-ids ArrayOf(document-id)
+        <assembly>props ArrayOf(property)
+        <assembly>links ArrayOf(link)
+        <define-assembly>role ArrayOf(roles)
+            <define-flag>id (token)
+            <model>
                 <field>title (markup-line)
-                <field>published
-                <field>last-modified
-                <field>version
-                <field>oscal-version
+                <field>short-name
+                <field>description (markup-multiline)
                 <assembly>props ArrayOf(property)
                 <assembly>links ArrayOf(link)
                 <field>remarks
-            </array-of>
-        </assembly>
+            </model>
+        </define-assembly>
     </model>
 </define-assembly>
 

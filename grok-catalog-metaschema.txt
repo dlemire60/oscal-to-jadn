@@ -86,13 +86,45 @@ Constraints are hard to understand.
     </model>
 </define-assembly>
 
+// yes, they really to define both a 
+// field and a flag with the same name
 <define-flag>location-uuid (uuid)
 <define-field>location-uuid (uuid)
+
 <define-field>party-uuid (uuid)
 <define-field>role-id (token)
 
-<define-assembly>"back-matter"  (complex structure, common to all OSCAL layers, TSBL)
-
+<define-assembly>"back-matter"  (complex structure, common to all OSCAL layers)
+    <model>
+        <define-assembly>resources ArrayOf(resource)
+            <flag>uuid (uuid)
+            <model>
+                <field>title (markup-line)
+                <field>description (markup-multiline)
+                <assembly>props ArrayOf(property)
+                <field>document-ids ArrayOf(document-id)
+                <define-assembly>citation
+                    <model>
+                        <field>text (markup-line)
+                        <assembly>props ArrayOf(property)
+                        <assembly>links ArrayOf(link)
+                    </model>
+                </define-assembly>
+                <define-assembly>rlinks ArrayOf(rlink)
+                    <flag>href (uri-reference)
+                    <flag>media-type
+                    <model>
+                        <field>hashes ArrayOf(hash)
+                    </model>
+                </define-assembly>
+                <field>base64 (base64Binary)
+                <flag>filename (token)
+                <flag>media-type
+                <field>remarks
+            </model>
+        </define-assembly>
+    </model>
+</define-assembly>
 
 
 

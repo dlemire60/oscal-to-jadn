@@ -139,6 +139,10 @@ Constraints are hard to understand.
 </define-assembly>
 
 
+//----- pick up with link
+
+
+
 <import href="oscal_control-common_metaschema.xml"/>
 
 //****************************************************************************//

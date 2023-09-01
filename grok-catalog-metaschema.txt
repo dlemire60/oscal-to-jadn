@@ -12,7 +12,7 @@ Constraints are hard to understand.
 //*************  structures from the Metadata metaschema *********************//
 //****************************************************************************//
 
-<define-assembly>"metadata"  (complex structure, common to all OSCAL layers, TBSL)
+<define-assembly>"metadata"  (complex structure, common to all OSCAL layers)
     <model>
         <field>title (markup-line)
         <field>published
@@ -80,8 +80,16 @@ Constraints are hard to understand.
                 <field>remarks
             </model>
         </define-assembly>
+        <assembly>responsible-parties ArrayOf(responsible-party)
+        <assembly>actions  ArrayOf(action)
+        <field>remarks
     </model>
 </define-assembly>
+
+<define-flag>location-uuid (uuid)
+<define-field>location-uuid (uuid)
+<define-field>party-uuid (uuid)
+<define-field>role-id (token)
 
 <define-assembly>"back-matter"  (complex structure, common to all OSCAL layers, TSBL)
 

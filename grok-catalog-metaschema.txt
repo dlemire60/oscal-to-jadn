@@ -60,6 +60,26 @@ Constraints are hard to understand.
                 <field>remarks
             <model>
         </define-assembly>
+        <define-assembly>parties  ArrayOf(party)
+            <flag>uuid
+            <flag>type
+            <model>
+                <field>name
+                <field>short-name
+                <field>external-ids ArrayOf(external-id)
+                    <flag>scheme (uri)
+                <assembly>props ArrayOf(property)
+                <assembly>links ArrayOf(link)
+                <field>email-addresses ArrayOf(email-address)
+                <field>telephone-numbers ArrayOf(telephone-number)
+                <choice>
+                    <assembly>addresses ArrayOf(address)
+                    <field>location-uuids ArrayOf(location-uuid)
+                </choice>
+                <field>member-of-organizations ArrayOf(uuid)
+                <field>remarks
+            </model>
+        </define-assembly>
     </model>
 </define-assembly>
 

@@ -126,6 +126,17 @@ Constraints are hard to understand.
     </model>
 </define-assembly>
 
+<define-assembly>property
+    <flag>name (token)
+    <flag>uuid (uuid)
+    <flag>ns (uri)
+    <flag>value
+    <flag>class (token)
+    <flag>group (token)
+    <model>
+        <field>remarks
+    </model>
+</define-assembly>
 
 
 <import href="oscal_control-common_metaschema.xml"/>

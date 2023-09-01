@@ -13,6 +13,26 @@ Constraints are hard to understand.
 //****************************************************************************//
 
 <define-assembly>"metadata"  (complex structure, common to all OSCAL layers, TBSL)
+    <model>
+        <field>title (markup-line)
+        <field>published
+        <field>last-modified
+        <field>version
+        <field>oscal-version
+        <assembly>revisions
+            <array-of>
+                <field>title (markup-line)
+                <field>published
+                <field>last-modified
+                <field>version
+                <field>oscal-version
+                <assembly>props ArrayOf(property)
+                <assembly>links ArrayOf(link)
+                <field>remarks
+            </array-of>
+        </assembly>
+    </model>
+</define-assembly>
 
 <define-assembly>"back-matter"  (complex structure, common to all OSCAL layers, TSBL)
 

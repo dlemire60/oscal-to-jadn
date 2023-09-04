@@ -159,6 +159,19 @@ Constraints are hard to understand.
     </model>
 </define-assembly>"responsible-party"
 
+<define-assembly>"action"
+    <flag>uuid (uuid)
+    <flag>date (dateTime-with-timezone)
+    <flag>type (token)
+    <flag>system (uri)
+    <model>
+        <assembly>props ArrayOf(property)
+        <assembly>links ArrayOf(link)
+        <assembly>responsible-parties ArrayOf(responsible-party)
+        <field>remarks
+    </model>
+</define-assembly>"action"
+
 
 
 <import href="oscal_control-common_metaschema.xml"/>

@@ -84,7 +84,7 @@ Constraints are hard to understand.
         <assembly>actions  ArrayOf(action)
         <field>remarks
     </model>
-</define-assembly>
+</define-assembly>metadata
 
 // yes, they really to define both a 
 // field and a flag with the same name
@@ -124,22 +124,34 @@ Constraints are hard to understand.
             </model>
         </define-assembly>
     </model>
-</define-assembly>
+</define-assembly>back-matter
 
 <define-assembly>property
     <flag>name (token)
     <flag>uuid (uuid)
     <flag>ns (uri)
-    <flag>value
+    <flag>value (string)
     <flag>class (token)
     <flag>group (token)
     <model>
         <field>remarks
     </model>
-</define-assembly>
+</define-assembly>property
+
+<define-assembly>link
+    <flag>href (uri-reference)
+    <flag> rel (token)
+    <flag>media-type
+    <flag>resource-fragment (string)
+    <model>
+        <field>text (markup-line)
+    </model>
+</define-assembly>link
 
 
-//----- pick up with link
+<define-assembly>"responsible-party"
+    <flag>role-id (token)
+</define-assembly>"responsible-party"
 
 
 

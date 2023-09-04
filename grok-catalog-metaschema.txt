@@ -191,6 +191,48 @@ Constraints are hard to understand.
         <enumeration> (get values from metaschema file)
 </define-field>"hash"
 
+<flag>"media-type" (string)
+
+<define-field>"remarks" (markup-multiline)
+
+
+// the following are labeled "local constructs"
+
+<define-field>"published" (dateTime-with-timezone)
+
+<define-field>"last-modified" (dateTime-with-timezone)
+
+<define-field>"version" (string?)
+
+<define-field>"oscal-version" (string?)
+
+<define-field>"telephone-number" (string?)
+    <define-flag>"type"
+        <enumeration>
+            "home"
+            "office"
+            "mobile"
+            (others allowed)
+        </enumeration>
+    </define-flag>"type"
+</define-field>"telephone-number"
+
+<define-assembly>"address"
+    <flag>type (location-type)
+    <model>
+        <field>addr-lines   ArrayOf(addr-line)
+        <field>city (string?)
+        <field>state (string?)
+        <field>postal-code (string?)
+        <field>country  (string pattern "[A-Z]{2}")
+    </model>
+</define-assembly>"address"
+
+<define-field>"addr-line" (string?)
+
+
+
+
 <import href="oscal_control-common_metaschema.xml"/>
 
 //****************************************************************************//

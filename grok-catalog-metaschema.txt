@@ -183,7 +183,13 @@ Constraints are hard to understand.
 </define-assembly>"responsible-role"
 
 
-
+// need to do some interpretation on the hash type
+// there are a set of patterns in the constraints
+// for the length of the different hash values
+<define-field>"hash"
+    <flag>algorithm (string)
+        <enumeration> (get values from metaschema file)
+</define-field>"hash"
 
 <import href="oscal_control-common_metaschema.xml"/>
 

@@ -151,6 +151,12 @@ Constraints are hard to understand.
 
 <define-assembly>"responsible-party"
     <flag>role-id (token)
+    <model>
+        <field>party-uuids ArrayOf(party-uuid)
+        <assembly>props ArrayOf(property)
+        <assembly>links ArrayOf(link)
+        <field>remarks
+    </model>
 </define-assembly>"responsible-party"
 
 

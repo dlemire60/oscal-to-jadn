@@ -230,8 +230,21 @@ Constraints are hard to understand.
 
 <define-field>"addr-line" (string?)
 
+<define-flag>"location-type" (token)
+    <enumeration>
+        "home"
+        "work"
+        (others allowed)
+    </enumeration>
+</define-flag>"location-type"
 
-
+<define-field>"document-id"
+    <flag>scheme (uri)
+        <enumeration>
+            "http://www.doi.org"
+            (others allowed)
+        </enumeration>
+</define-field>"document-id"
 
 <import href="oscal_control-common_metaschema.xml"/>
 

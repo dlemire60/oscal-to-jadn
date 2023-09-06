@@ -1,0 +1,67 @@
+{
+  "info": {
+    "package": "https://github.com/usnistgov/OSCAL/blob/main/src/metaschema/oscal_control-common_metaschema.xml",
+    "config": {
+      "$MaxBinary": 255,
+      "$MaxString": 255,
+      "$MaxElements": 100,
+      "$Sys": "$",
+      "$TypeName": "^[A-Za-z][-$A-Za-z0-9]{0,63}$",
+      "$FieldName": "^[A-Za-z][-_A-Za-z0-9]{0,63}$",
+      "$NSID": "^[A-Za-z][A-Za-z0-9]{0,7}$"
+    },
+    "title": "common control metaschema",
+    "namespaces": {
+      "metadata": "https://github.com/usnistgov/OSCAL/blob/main/src/metaschema/oscal_metadata_metaschema.xml"
+    }
+  },
+  "types": [
+    ["Part", "Record", [], "An annotated, markup-based textual element of a control's or catalog group's definition, or a child of another part.", [
+    [1, "id", "String", ["%^\\S(.*\\S)?$"], ""],
+    [2, "name", "String", ["%^\\S(.*\\S)?$", "[1"], "A textual label that uniquely identifies the part's semantic type, which exists in a value space qualified by the ns"],
+    [3, "namespace", "String", ["/uri"], "An optional namespace qualifying the part's name. This allows different organizations to associate distinct semantics with the same name. default=\"http://csrc.nist.gov/ns/oscal\""],
+    [4, "class", "String", ["%^\\S(.*\\S)?$"], "An optional textual providing a sub-type or characterization of the part's name, or a category to which the part belongs."],
+    [5, "part_model", "Part-Model", [], ""]
+  ]],
+    ["Part-Model", "Record", [], "", [
+    [1, "title", "String", [], "An optional name given to the part, which may be used by a tool for display and navigation."],
+    [2, "props", "ArrayOf", ["*metadata:Property", "]0"], ""],
+    [3, "prose", "String", [], "Permits multiple paragraphs, lists, tables etc."],
+    [4, "parts", "ArrayOf", ["*Part", "]0"], ""],
+    [5, "links", "ArrayOf", ["*metaschema:Link", "]0"], ""]
+  ]],
+    ["Parameter", "Record", [], "", [
+    [1, "id", "String", ["%^\\S(.*\\S)?$"], ""],
+    [2, "class", "String", ["%^\\S(.*\\S)?$"], ""],
+    [3, "depends-on", "String", [], ""],
+    [4, "parameter-model", "ArrayOf", ["*metadata:Link", "]0"], ""]
+  ]],
+    ["Parameter-Model", "Record", [], "", [
+    [1, "props", "ArrayOf", ["*metadata:Property", "]0"], ""],
+    [2, "links", "ArrayOf", ["*metadata:Link", "]0"], ""],
+    [3, "label", "String", [], "A short, placeholder name for the parameter, which can be used as a substitute for a value if no value is assigned."],
+    [4, "usage", "String", [], "Describes the purpose and use of a parameter."],
+    [5, "constraints", "ArrayOf", ["*Parameter-Constraint", "]0"], ""],
+    [6, "guidelines", "ArrayOf", ["*Parameter-Guideline", "]0"], ""],
+    [7, "values-selection", "Parameter-Selection", [], ""]
+  ]],
+    ["Parameter-Constraint", "Record", [], "", [
+    [1, "description", "String", [], ""],
+    [2, "tests", "ArrayOf", ["*Test", "]0"], ""]
+  ]],
+    ["Parameter-Guideline", "Record", [], "A prose statement that provides a recommendation for the use of a parameter.", [
+    [1, "prose", "String", [], "Prose permits multiple paragraphs, lists, tables etc."]
+  ]],
+    ["Test", "Record", [], "A test expression which is expected to be evaluated by a tool", [
+    [1, "expression", "String", ["[1"], "A formal (executable) expression of a constraint."]
+  ]],
+    ["Parameter-Selection", "Record", [], "Presenting a choice among alternatives", [
+    [1, "how-many", "ArrayOf", ["*String"], ""],
+    [2, "choice", "ArrayOf", ["*String", "]0"], "A value selection among several such options."]
+  ]],
+    ["Parameter-Cardinality", "Enumerated", [], "Describes the number of selections that must occur. Without this setting, only one value should be assumed to be permitted.", [
+    [1, "one", "Only one value is permitted."],
+    [2, "one-or-more", "One or more values are permitted."]
+  ]]
+  ]
+}

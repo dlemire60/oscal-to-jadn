@@ -12,12 +12,239 @@ Constraints are hard to understand.
 //*************  structures from the Metadata metaschema *********************//
 //****************************************************************************//
 
-<define-assembly>"metadata"  (complex structure, common to all OSCAL layers, TBSL)
+<define-assembly>"metadata"  (complex structure, common to all OSCAL layers)
+    <model>
+        <field>title (markup-line)
+        <field>published
+        <field>last-modified
+        <field>version
+        <field>oscal-version
+        <define-assembly>revisions
+            <model>
+                <array-of>
+                    <field>title (markup-line)
+                    <field>published
+                    <field>last-modified
+                    <field>version
+                    <field>oscal-version
+                    <assembly>props ArrayOf(property)
+                    <assembly>links ArrayOf(link)
+                    <field>remarks
+                </array-of>
+            </model>
+        </define-assembly>
+        <field>document-ids ArrayOf(document-id)
+        <assembly>props ArrayOf(property)
+        <assembly>links ArrayOf(link)
+        <define-assembly>role ArrayOf(roles)
+            <define-flag>id (token)
+            <model>
+                <field>title (markup-line)
+                <field>short-name
+                <field>description (markup-multiline)
+                <assembly>props ArrayOf(property)
+                <assembly>links ArrayOf(link)
+                <field>remarks
+            </model>
+        </define-assembly>
+        <define-assembly>locations ArrayOf(location)
+            <flag>uuid
+            <model>
+                <field>title (markup-line)
+                <assembly>address
+                <field>email-addresses ArrayOf(email-address)
+                <field>telephone-numbers ArrayOf(telephone-number)
+                <field>urls ArrayOf(url)
+                <field>props ArrayOf(property)
+                <field>links ArrayOf(link)
+                <field>remarks
+            <model>
+        </define-assembly>
+        <define-assembly>parties  ArrayOf(party)
+            <flag>uuid
+            <flag>type
+            <model>
+                <field>name
+                <field>short-name
+                <field>external-ids ArrayOf(external-id)
+                    <flag>scheme (uri)
+                <assembly>props ArrayOf(property)
+                <assembly>links ArrayOf(link)
+                <field>email-addresses ArrayOf(email-address)
+                <field>telephone-numbers ArrayOf(telephone-number)
+                <choice>
+                    <assembly>addresses ArrayOf(address)
+                    <field>location-uuids ArrayOf(location-uuid)
+                </choice>
+                <field>member-of-organizations ArrayOf(uuid)
+                <field>remarks
+            </model>
+        </define-assembly>
+        <assembly>responsible-parties ArrayOf(responsible-party)
+        <assembly>actions  ArrayOf(action)
+        <field>remarks
+    </model>
+</define-assembly>metadata
 
-<define-assembly>"back-matter"  (complex structure, common to all OSCAL layers, TSBL)
+// yes, they really to define both a 
+// field and a flag with the same name
+<define-flag>location-uuid (uuid)
+<define-field>location-uuid (uuid)
+
+<define-field>party-uuid (uuid)
+<define-field>role-id (token)
+
+<define-assembly>"back-matter"  (complex structure, common to all OSCAL layers)
+    <model>
+        <define-assembly>resources ArrayOf(resource)
+            <flag>uuid (uuid)
+            <model>
+                <field>title (markup-line)
+                <field>description (markup-multiline)
+                <assembly>props ArrayOf(property)
+                <field>document-ids ArrayOf(document-id)
+                <define-assembly>citation
+                    <model>
+                        <field>text (markup-line)
+                        <assembly>props ArrayOf(property)
+                        <assembly>links ArrayOf(link)
+                    </model>
+                </define-assembly>
+                <define-assembly>rlinks ArrayOf(rlink)
+                    <flag>href (uri-reference)
+                    <flag>media-type
+                    <model>
+                        <field>hashes ArrayOf(hash)
+                    </model>
+                </define-assembly>
+                <field>base64 (base64Binary)
+                <flag>filename (token)
+                <flag>media-type
+                <field>remarks
+            </model>
+        </define-assembly>
+    </model>
+</define-assembly>back-matter
+
+<define-assembly>property
+    <flag>name (token)
+    <flag>uuid (uuid)
+    <flag>ns (uri)
+    <flag>value (string)
+    <flag>class (token)
+    <flag>group (token)
+    <model>
+        <field>remarks
+    </model>
+</define-assembly>property
+
+<define-assembly>link
+    <flag>href (uri-reference)
+    <flag> rel (token)
+    <flag>media-type
+    <flag>resource-fragment (string)
+    <model>
+        <field>text (markup-line)
+    </model>
+</define-assembly>link
 
 
+<define-assembly>"responsible-party"
+    <flag>role-id (token)
+    <model>
+        <field>party-uuids ArrayOf(party-uuid)
+        <assembly>props ArrayOf(property)
+        <assembly>links ArrayOf(link)
+        <field>remarks
+    </model>
+</define-assembly>"responsible-party"
 
+<define-assembly>"action"
+    <flag>uuid (uuid)
+    <flag>date (dateTime-with-timezone)
+    <flag>type (token)
+    <flag>system (uri)
+    <model>
+        <assembly>props ArrayOf(property)
+        <assembly>links ArrayOf(link)
+        <assembly>responsible-parties ArrayOf(responsible-party)
+        <field>remarks
+    </model>
+</define-assembly>"action"
+
+<define-assembly>"responsible-role"
+    <flag>role-id (token)
+    <model>
+        <assembly>props ArrayOf(property)
+        <assembly>links ArrayOf(link)
+        <field>party-uuids ArrayOf(party-uuid)
+        <field>remarks
+    </model>
+</define-assembly>"responsible-role"
+
+
+// need to do some interpretation on the hash type
+// there are a set of patterns in the constraints
+// for the length of the different hash values
+<define-field>"hash"
+    <flag>algorithm (string)
+        <enumeration> (get values from metaschema file)
+</define-field>"hash"
+
+<flag>"media-type" (string)
+
+<define-field>"remarks" (markup-multiline)
+
+
+// the following are labeled "local constructs"
+
+<define-field>"published" (dateTime-with-timezone)
+
+<define-field>"last-modified" (dateTime-with-timezone)
+
+<define-field>"version" (string?)
+
+<define-field>"oscal-version" (string?)
+
+<define-field>"telephone-number" (string?)
+    <define-flag>"type"
+        <enumeration>
+            "home"
+            "office"
+            "mobile"
+            (others allowed)
+        </enumeration>
+    </define-flag>"type"
+</define-field>"telephone-number"
+
+<define-assembly>"address"
+    <flag>type (location-type)
+    <model>
+        <field>addr-lines   ArrayOf(addr-line)
+        <field>city (string?)
+        <field>state (string?)
+        <field>postal-code (string?)
+        <field>country  (string pattern "[A-Z]{2}")
+    </model>
+</define-assembly>"address"
+
+<define-field>"addr-line" (string?)
+
+<define-flag>"location-type" (token)
+    <enumeration>
+        "home"
+        "work"
+        (others allowed)
+    </enumeration>
+</define-flag>"location-type"
+
+<define-field>"document-id"
+    <flag>scheme (uri)
+        <enumeration>
+            "http://www.doi.org"
+            (others allowed)
+        </enumeration>
+</define-field>"document-id"
 
 <import href="oscal_control-common_metaschema.xml"/>
 

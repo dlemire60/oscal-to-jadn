@@ -1,0 +1,392 @@
+Trying to grok the Component metaschema. Below is the top level structure 
+(vastly simplifying their syntax). This model defines assemblies for Catalog, 
+Group, and Control. Part, Parameter, and Control-related constructs are 
+imported from control-common metaschema. Metadata, back-matter, and several 
+"utility", constructs are imported from the metadata metaschema. At first blush,
+Constraints are hard to understand.
+
+
+<import href="oscal_metadata_metaschema.xml"/>
+
+//****************************************************************************//
+//*************  structures from the Metadata metaschema *********************//
+//****************************************************************************//
+
+<define-assembly>"metadata"  (complex structure, common to all OSCAL layers)
+    <model>
+        <field>title (markup-line)
+        <field>published
+        <field>last-modified
+        <field>version
+        <field>oscal-version
+        <define-assembly>revisions
+            <model>
+                <array-of>
+                    <field>title (markup-line)
+                    <field>published
+                    <field>last-modified
+                    <field>version
+                    <field>oscal-version
+                    <assembly>props ArrayOf(property)
+                    <assembly>links ArrayOf(link)
+                    <field>remarks
+                </array-of>
+            </model>
+        </define-assembly>
+        <field>document-ids ArrayOf(document-id)
+        <assembly>props ArrayOf(property)
+        <assembly>links ArrayOf(link)
+        <define-assembly>role ArrayOf(roles)
+            <define-flag>id (token)
+            <model>
+                <field>title (markup-line)
+                <field>short-name
+                <field>description (markup-multiline)
+                <assembly>props ArrayOf(property)
+                <assembly>links ArrayOf(link)
+                <field>remarks
+            </model>
+        </define-assembly>
+        <define-assembly>locations ArrayOf(location)
+            <flag>uuid
+            <model>
+                <field>title (markup-line)
+                <assembly>address
+                <field>email-addresses ArrayOf(email-address)
+                <field>telephone-numbers ArrayOf(telephone-number)
+                <field>urls ArrayOf(url)
+                <field>props ArrayOf(property)
+                <field>links ArrayOf(link)
+                <field>remarks
+            <model>
+        </define-assembly>
+        <define-assembly>parties  ArrayOf(party)
+            <flag>uuid
+            <flag>type
+            <model>
+                <field>name
+                <field>short-name
+                <field>external-ids ArrayOf(external-id)
+                    <flag>scheme (uri)
+                <assembly>props ArrayOf(property)
+                <assembly>links ArrayOf(link)
+                <field>email-addresses ArrayOf(email-address)
+                <field>telephone-numbers ArrayOf(telephone-number)
+                <choice>
+                    <assembly>addresses ArrayOf(address)
+                    <field>location-uuids ArrayOf(location-uuid)
+                </choice>
+                <field>member-of-organizations ArrayOf(uuid)
+                <field>remarks
+            </model>
+        </define-assembly>
+        <assembly>responsible-parties ArrayOf(responsible-party)
+        <assembly>actions  ArrayOf(action)
+        <field>remarks
+    </model>
+</define-assembly>metadata
+
+// yes, they really to define both a 
+// field and a flag with the same name
+<define-flag>location-uuid (uuid)
+<define-field>location-uuid (uuid)
+
+<define-field>party-uuid (uuid)
+<define-field>role-id (token)
+
+<define-assembly>"back-matter"  (complex structure, common to all OSCAL layers)
+    <model>
+        <define-assembly>resources ArrayOf(resource)
+            <flag>uuid (uuid)
+            <model>
+                <field>title (markup-line)
+                <field>description (markup-multiline)
+                <assembly>props ArrayOf(property)
+                <field>document-ids ArrayOf(document-id)
+                <define-assembly>citation
+                    <model>
+                        <field>text (markup-line)
+                        <assembly>props ArrayOf(property)
+                        <assembly>links ArrayOf(link)
+                    </model>
+                </define-assembly>
+                <define-assembly>rlinks ArrayOf(rlink)
+                    <flag>href (uri-reference)
+                    <flag>media-type
+                    <model>
+                        <field>hashes ArrayOf(hash)
+                    </model>
+                </define-assembly>
+                <field>base64 (base64Binary)
+                <flag>filename (token)
+                <flag>media-type
+                <field>remarks
+            </model>
+        </define-assembly>
+    </model>
+</define-assembly>back-matter
+
+<define-assembly>property
+    <flag>name (token)
+    <flag>uuid (uuid)
+    <flag>ns (uri)
+    <flag>value (string)
+    <flag>class (token)
+    <flag>group (token)
+    <model>
+        <field>remarks
+    </model>
+</define-assembly>property
+
+<define-assembly>link
+    <flag>href (uri-reference)
+    <flag> rel (token)
+    <flag>media-type
+    <flag>resource-fragment (string)
+    <model>
+        <field>text (markup-line)
+    </model>
+</define-assembly>link
+
+
+<define-assembly>"responsible-party"
+    <flag>role-id (token)
+    <model>
+        <field>party-uuids ArrayOf(party-uuid)
+        <assembly>props ArrayOf(property)
+        <assembly>links ArrayOf(link)
+        <field>remarks
+    </model>
+</define-assembly>"responsible-party"
+
+<define-assembly>"action"
+    <flag>uuid (uuid)
+    <flag>date (dateTime-with-timezone)
+    <flag>type (token)
+    <flag>system (uri)
+    <model>
+        <assembly>props ArrayOf(property)
+        <assembly>links ArrayOf(link)
+        <assembly>responsible-parties ArrayOf(responsible-party)
+        <field>remarks
+    </model>
+</define-assembly>"action"
+
+<define-assembly>"responsible-role"
+    <flag>role-id (token)
+    <model>
+        <assembly>props ArrayOf(property)
+        <assembly>links ArrayOf(link)
+        <field>party-uuids ArrayOf(party-uuid)
+        <field>remarks
+    </model>
+</define-assembly>"responsible-role"
+
+
+// need to do some interpretation on the hash type
+// there are a set of patterns in the constraints
+// for the length of the different hash values
+<define-field>"hash"
+    <flag>algorithm (string)
+        <enumeration> (get values from metaschema file)
+</define-field>"hash"
+
+<flag>"media-type" (string)
+
+<define-field>"remarks" (markup-multiline)
+
+
+// the following are labeled "local constructs"
+
+<define-field>"published" (dateTime-with-timezone)
+
+<define-field>"last-modified" (dateTime-with-timezone)
+
+<define-field>"version" (string?)
+
+<define-field>"oscal-version" (string?)
+
+<define-field>"telephone-number" (string?)
+    <define-flag>"type"
+        <enumeration>
+            "home"
+            "office"
+            "mobile"
+            (others allowed)
+        </enumeration>
+    </define-flag>"type"
+</define-field>"telephone-number"
+
+<define-assembly>"address"
+    <flag>type (location-type)
+    <model>
+        <field>addr-lines   ArrayOf(addr-line)
+        <field>city (string?)
+        <field>state (string?)
+        <field>postal-code (string?)
+        <field>country  (string pattern "[A-Z]{2}")
+    </model>
+</define-assembly>"address"
+
+<define-field>"addr-line" (string?)
+
+<define-flag>"location-type" (token)
+    <enumeration>
+        "home"
+        "work"
+        (others allowed)
+    </enumeration>
+</define-flag>"location-type"
+
+<define-field>"document-id"
+    <flag>scheme (uri)
+        <enumeration>
+            "http://www.doi.org"
+            (others allowed)
+        </enumeration>
+</define-field>"document-id"
+
+<import href="oscal_control-common_metaschema.xml"/>
+
+//****************************************************************************//
+//**********  structures from the Control Common metaschema ******************//
+//****************************************************************************//
+
+<define-assembly>"part"
+    <define-flag>"id" (Token, because intended to be human-readable)
+    <define-flag>"name" (token)
+    <define-flag>"ns" (URI -- optional namespace for the part)
+    <define-flag>"class" (token -- provides sub-type or category)
+    <model>
+        <define-field>"title (markup-line)
+        <assembly>"props" (an array of property)
+        <define-field>"prose" (markup-multiline)
+        <assembly>"parts" (array of part)
+        <assembly>"link" (an array of links)
+    </model>
+    <contraint>(an "allowed values" constraint)
+</define-assembly>
+
+
+<define-assembly>"parameter"
+    <define-flag>"id" (Token, because intended to be human-readable)
+    <define-flag>"class" (token -- provides sub-type or category)
+    <define-flag>"depends-on" (token -- deprecated)
+    <model>
+        <assembly>"props" (an array of property)
+        <assembly>"link" (an array of links)
+        <define-field>"label" (markup-line)
+        <define-field>"usage" (markup-multiline)
+        <assembly>"constraints" (array of parameter-constraint)
+        <assembly>"guidelines" (array of parameter-guideline)
+        <choice>
+            <field>"values" (array of parameter-value)
+            <assembly>"select" (parameter-selection)
+        </choice>
+        <field>"remarks"
+    </model>
+    <contraint>(a couple of "allowed values" constraints, and an expected target)
+</define-assembly>
+
+
+<define-assembly>"parameter-constraint"
+    <model>
+        <define-field>"description" (markup-multiline)
+        <define-assembly>"tests" (array of test)
+            <model>
+                <define-field>"expression" (string)
+                <field>"remarks"
+            </model>
+        </define-assembly>
+    </model>
+</define-assembly>
+
+
+<define-assembly>"parameter-guideline"
+    <model>
+        <define-field>"prose" (markup-multiline)
+    </model>
+</define-assembly>
+
+
+<define-field>"parameter-value"  (no additional information with this)
+
+
+<define-assembly>"parameter-selection"
+    <define-flag>"how-many" (token)
+        <constraint>
+            <allowed-values>
+                <enum>"one"
+                <enum>"one-or-more"
+            </allowed-values>
+        </constraint>
+    <define-flag>
+    <model>
+        <define-field>"choice" (array of markup-line)
+    </model>
+<define-assembly>
+
+
+<define-flag>"control-id" (token)
+
+
+<define-assembly>"include-all"  (what does this construct actually do??????)
+
+
+
+
+//****************************************************************************//
+//**************  Structures from the Catalog metaschema *********************//
+//****************************************************************************//
+
+<define-assembly>"component-definition"
+    <define-flag>"uuid"  (with a bunch of properties that I guess are for the tooling, don't show in JSON schema)
+    <model>
+        <assembly>"metadata" (imported from common metadata Metaschema)
+        <assembly>"import-component-definitions" (an array 0..* of imported components)
+        <assembly>"components" (an array 0..* of defined-components)
+        <assembly>"capabilities" (an array 0..* of capability)
+        <assembly>"back-matter"
+    </model>
+    <contraint>(an index definition and a requirement for components within a capability to be unique)
+</define-assembly "component-definition">
+
+<define-assembly>"import-component-definition"
+    <define-flag>"href" (a uri-reference, A link to a resource that defines a set of components and/or capabilities to import into this collection.)
+    <remarks>
+        <p>This value may be one of:</p>
+        <ol>
+           <li>an absolute URI that points to a network resolvable resource,</li>
+           <li>a relative reference pointing to a network resolvable resource whose base URI is the URI of the containing document, or</li>
+           <li>a bare URI fragment (i.e., `#uuid`) pointing to a <code>back-matter</code> resource in this or an imported document</li>
+        </ol>
+    </remarks>
+</define-assembly>"import-component-definition"
+
+    <define-flag>"class" (another Token)
+    <model>
+        <assembly>"parameter" (an array of parameters)
+        <define-field>"title"
+        <assembly>"parameter" (an array of parameters)
+        <assembly>"property" (an array of properties)
+        <assembly>"link" (an array of links)
+        <assembly>"part" (an array of parts)
+        <choice>
+            <assembly>"group" (an array of groups)
+            <assembly>"control" (an array of controls)
+    </model>
+    <contraint>(a couple of "allowed values" constraints)
+</define-assembly "import-component-definition">
+
+<define-assembly>"control"
+    <define-flag>"id" (this one is a Token, because externally-managed)
+    <define-flag>"class"
+    <model>
+        <define-field>"title"
+        <assembly>"parameter" (an array of parameters)
+        <assembly>"property" (an array of properties)
+        <assembly>"link" (an array of links)
+        <assembly>"part" (an array of parts)
+        <assembly>"control" (an array of controls)
+    </model>  
+    <contraint>(a large number of "allowed values" constraints, an index definition, several "expected values")

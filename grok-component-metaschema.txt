@@ -337,6 +337,22 @@ Constraints are hard to understand.
 //***********************************************************************//
 
 
+<define-assembly>"component-definition" // Component Definition: A collection of component descriptions, which may optionally be grouped by capability.
+    <define-flag>uuid : uuid            // Component Definition Universally Unique Identifier: Provides a globally unique means to identify a given component definition instance.
+    <model>
+        <assembly>metadata
+        <assembly>import-component-definitions : ArrayOf(import-component-definition)
+        <assembly>components : ArrayOf(defined-component)
+        <assembly>capabilities : ArrayOf(capability)
+        <assembly>back-matter
+    </model>
+    <constraint>Since multiple component entries can be provided, each component must have a unique uuid.
+    <constraint>A given component must not be referenced more than once within the same capability.
+</define-assembly> {"component-definition"}
+
+
+
+
 <define-assembly>"import-component-definition"  // Import Component Definition: Loads a component definition from another resource.
     <define-flag>href : uri-reference           // Hyperlink Reference: A link to a resource that defines a set of components and/or capabilities to import into this collection.
 </define-assembly> {"import=component-definition"}

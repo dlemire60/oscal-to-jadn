@@ -16,6 +16,7 @@
       <p>The root of the OSCAL Implementation Layer Component Definition model is <code>component-definition</code>.</p>
    </remarks>
    <import href="oscal_implementation-common_metaschema_RESOLVED.xml"/>
+   
    <define-assembly name="component-definition">
       <formal-name>Component Definition</formal-name>
       <description>A collection of component descriptions, which may optionally be grouped by capability.</description>

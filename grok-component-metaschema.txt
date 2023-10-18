@@ -336,6 +336,21 @@ Constraints are hard to understand.
 //**********  structures from the Component metaschema ******************//
 //***********************************************************************//
 
+<define-assembly>"capability"       // Capability: A grouping of other components and/or capabilities.
+    <define-flag>uuid : uuid        // Capability Identifier: Provides a globally unique means to identify a given capability.
+    <define-flag>name : string      // Capability Name: The capability's human-readable name.
+    <model>
+        <define-field>description : multiline-markup  // Capability Description: A summary of the capability.
+        <assembly>props : ArrayOf(property)
+        <assembly>links : ArrayOf(link)
+        <assembly>incorporates-components : ArrayOf(incorporates-component)
+        <assembly>control-implementations : ArrayOf(control-implementation)
+        <field>remarks : string
+    </model>
+    <constraint>A given component must not be referenced more than once within the same capability.
+</define-assembly> {"capability"}
+
+
 <define-assembly>"incorporates-component"   // Incorporates Component: The collection of components comprising this capability.
     <define-flag>component-uuid : uuid      // Component Reference: A machine-oriented identifier reference to a component
     <model>

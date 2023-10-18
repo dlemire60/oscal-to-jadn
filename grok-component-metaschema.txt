@@ -337,6 +337,28 @@ Constraints are hard to understand.
 //***********************************************************************//
 
 
+<define-assembly>"defined-component"    // Component: A defined component that can be part of an implemented system.
+    <define-flag>uuid : uuid            // Component Identifier: Provides a globally unique means to identify a given component.
+    <flag>type : defined-component-type
+    <model>
+        <define-field>title : markup-line               // Component Title: A human readable name for the component.
+        <define-field>description : multiline-markup    // CComponent Description: A description of the component, including information about its function.
+        <define-field>purpose : markup-line             // Purpose: A summary of the technological or business purpose of the component.
+        <assembly>props : ArrayOf(property)
+        <assembly>links : ArrayOf(link)
+        <assembly>responsible-roles : ArrayOf(responsible-role)
+        <assembly>protocols : ArrayOf(protocol)         // Used for service components to define the protocols supported by the service.
+        <assembly>control-implementations : ArrayOf(control-implementation)
+        <field>remarks : string
+    </model>
+
+// need to work out how to apply the various constraints on this type in JADN-speak
+
+</define-assembly> {"defined-component"}
+
+
+
+
 <define-flag>"defined-component-type" : enumerated  // Component Type: A category describing the purpose of the component.
                                                     // Additional values allowed
     1   interconnection // A connection to something outside this system.

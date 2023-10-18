@@ -336,6 +336,24 @@ Constraints are hard to understand.
 //**********  structures from the Component metaschema ******************//
 //***********************************************************************//
 
+
+<define-flag>"defined-component-type" : enumerated  // Component Type: A category describing the purpose of the component.
+                                                    // Additional values allowed
+    1   interconnection // A connection to something outside this system.
+    2   software        // Any software, operating system, or firmware.
+    3   hardware        // A physical device.
+    4   service         // A service that may provide APIs.
+    5   policy          // An enforceable policy.
+    6   physical        // A tangible asset used to provide physical protections or countermeasures.
+    7   process-procedure   // A list of steps or actions to take to achieve some end result.
+    8   plan            // An applicable plan.    
+    9   guidance        // Any guideline or recommendation.
+    10  standard        // Any organizational or industry standard.
+    11   validation     // An external assessment performed on some other component, that has been validated by a third-party.
+</define-flag>
+
+
+
 <define-assembly>"capability"       // Capability: A grouping of other components and/or capabilities.
     <define-flag>uuid : uuid        // Capability Identifier: Provides a globally unique means to identify a given capability.
     <define-flag>name : string      // Capability Name: The capability's human-readable name.

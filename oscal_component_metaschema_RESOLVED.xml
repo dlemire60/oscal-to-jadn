@@ -453,7 +453,7 @@
       <remarks>
          <p>Use of <code>set-parameter</code> in this context, sets the parameter for all controls referenced by any <code>implemented-requirement</code> contained in this context. Any <code>set-parameter</code> defined in a child context will override this value. If not overridden by a child, this value applies in the child context.</p>
       </remarks>
-   </define-assembly>
+   </define-assembly> {"control-implementation"}
 
    <define-assembly name="implemented-requirement" scope="local">
       <formal-name>Control Implementation</formal-name>

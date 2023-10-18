@@ -336,12 +336,28 @@ Constraints are hard to understand.
 //**********  structures from the Component metaschema ******************//
 //***********************************************************************//
 
+<define-assembly>"control-implementation"   // Control Implementation Set:  Defines how the component or capability supports a set of controls.
+    <define-flag>uuid : uuid              // Control Implementation Set Identifier: Provides a means to identify a set of control implementations that are supported by a given component or capability.
+    <define-flag>source : uri-reference   // Source Resource Reference: A reference to an OSCAL catalog or profile providing the referenced control or subcontrol definition.
+    <model>
+        <define-field>description : multiline-markup  // Control Implementation Description: A description of how the specified set of controls are implemented for the containing component or capability.
+        <assembly>props : ArrayOf(property)
+        <assembly>links : ArrayOf(link)
+        <assembly>set-parameters : ArrayOf(set-parameter)
+        <assembly>implemented-requirements : ArrayOf(implemented-requirement)
+    </model>
+    <constraint>Since multiple set-parameter entries can be provided, each parameter must be set only once.
+    <remarks>
+        <p>Use of <code>set-parameter</code> in this context, sets the parameter for all controls referenced by any <code>implemented-requirement</code> contained in this context. Any <code>set-parameter</code> defined in a child context will override this value. If not overridden by a child, this value applies in the child context.</p>
+    </remarks>
+</define-assembly> {"control-implementation"}
+
 
 <define-assembly> "implemented-requirement"     // Control Implementation:  Describes how the containing component or capability implements an individual control.
-    <define-flag>"uuid" : uuid                 // Control Implementation Identifier
-    <flag>"control-id" : control-id
+    <define-flag>uuid : uuid                 // Control Implementation Identifier
+    <flag>control-id : control-id
     <model>
-        <define-field>"description" : multiline-markup  // Control Implementation Description: A suggestion from the supplier (e.g., component vendor or author) for how the specified control may be implemented if the containing component or capability is instantiated in a system security plan.
+        <define-field>description : multiline-markup  // Control Implementation Description: A suggestion from the supplier (e.g., component vendor or author) for how the specified control may be implemented if the containing component or capability is instantiated in a system security plan.
         <assembly>props : ArrayOf(property)
         <assembly>links : ArrayOf(link)
         <assembly>set-parameters : ArrayOf(set-parameter)
@@ -357,16 +373,17 @@ Constraints are hard to understand.
     </remarks>
 </define-assembly> {"implemented-requirement"}
 
+
 <define-assembly>"statement"            // Control Statement Implementation: Identifies which statements within a control are addressed.
-    <flag>"statement-id" : string       // A reference to the specific implemented statement associated with a control.
-    <define-flag>"uuid"  : uuid         // Machine readable universal identifier
+    <flag>statement-id : string       // A reference to the specific implemented statement associated with a control.
+    <define-flag>uuid  : uuid         // Machine readable universal identifier
     <model>
     </model>
-        <define-field>"description" : multiline-markup  // Statement Implementation Description: A summary of how the containing control statement is implemented by the component or capability.
+        <define-field>description : multiline-markup  // Statement Implementation Description: A summary of how the containing control statement is implemented by the component or capability.
         <assembly>props : ArrayOf(property)
         <assembly>links : ArrayOf(link)
         <assembly>responsible-roles : ArrayOf(responsible-role)
-        <field>"remarks" : string
+        <field>remarks : string
         <constraint>Since responsible-role associates multiple party-uuid entries with a single role-id, each role-id must be referenced only once.
 </define-assembly> {"statement"}
 

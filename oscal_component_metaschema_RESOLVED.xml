@@ -16,7 +16,6 @@
       <p>The root of the OSCAL Implementation Layer Component Definition model is <code>component-definition</code>.</p>
    </remarks>
    <import href="oscal_implementation-common_metaschema_RESOLVED.xml"/>
-   
    <define-assembly name="component-definition">
       <formal-name>Component Definition</formal-name>
       <description>A collection of component descriptions, which may optionally be grouped by capability.</description>
@@ -454,7 +453,7 @@
       <remarks>
          <p>Use of <code>set-parameter</code> in this context, sets the parameter for all controls referenced by any <code>implemented-requirement</code> contained in this context. Any <code>set-parameter</code> defined in a child context will override this value. If not overridden by a child, this value applies in the child context.</p>
       </remarks>
-   </define-assembly> {"control-implementation"}
+   </define-assembly> 
 
    <define-assembly name="implemented-requirement" scope="local">
       <formal-name>Control Implementation</formal-name>

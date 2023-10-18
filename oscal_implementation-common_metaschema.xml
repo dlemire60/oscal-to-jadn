@@ -451,12 +451,12 @@
                   <!-- Identifier Declaration -->
                   <description>A <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#machine-oriented">machine-oriented</a>, <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#globally-unique">globally unique</a> identifier with <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#cross-instance">cross-instance</a> scope that can be used to reference this inventory item elsewhere in <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#scope">this or other OSCAL instances</a>. The locally defined <em>UUID</em> of the <code>inventory item</code> can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#consistency">per-subject</a>, which means it should be consistently used to identify the same subject across revisions of the document.</description>
             </define-flag>
-            <!-- CHANGED: Moved to property[@name='asset-id']. -->
-            <!--      <define-flag name="asset-id">
-         <!-\- This is an id because the idenfier is assigned and managed externally. -\->
-         <formal-name>Asset Identifier</formal-name>
-         <description>Organizational asset identifier that is unique in the context of the system. This may be a reference to the identifier used in an asset tracking system or a vulnerability scanning tool.</description>
-            </define-flag>  -->
+                  <!-- CHANGED: Moved to property[@name='asset-id']. -->
+                  <!--      <define-flag name="asset-id">
+               <!-\- This is an id because the idenfier is assigned and managed externally. -\->
+               <formal-name>Asset Identifier</formal-name>
+               <description>Organizational asset identifier that is unique in the context of the system. This may be a reference to the identifier used in an asset tracking system or a vulnerability scanning tool.</description>
+                  </define-flag>  -->
             <model>
                   <define-field name="description" as-type="markup-multiline" min-occurs="1" in-xml="WITH_WRAPPER">
                         <formal-name>Inventory Item Description</formal-name>
@@ -483,25 +483,25 @@
                               <description>A <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#machine-oriented">machine-oriented</a> identifier reference to a <code>component</code> that is implemented as part of an inventory item.</description>
                         </define-flag>
 
-                        <!-- CHANGED (daw): the following is not needed since it is required on the referenced component -->
-                        <!--      <!-\- CHANGED (BJR): Added component-type for alignment with system-component -\->
-      <flag ref="component-type" required="yes" />
--->
-                        <!-- The following is commented because this is not being used and can be inferred based on the type of the component -->
-                        <!--
-      <define-flag name="use">
-         <formal-name>Implementation Use Type</formal-name>
-         <description>The type of implementation</description>
-         <constraint>
-            <allowed-values allow-other="yes">
-               <enum value="runs-software">The implemented component is a 'software' component that the inventory item has installed and uses.</enum>
-               <enum value="uses-hardware">The implemented component is a 'hardware' component that the inventory item has installed and uses.</enum>
-               <enum value="enforces-policy">The implemented component is a 'policy' component that the inventory item supports and enforces.</enum>
-               <enum value="implements-process">The implemented component is a 'process' component that the inventory item supports and enforces.</enum>
-            </allowed-values>
-         </constraint>
-      </define-flag>
--->
+                                    <!-- CHANGED (daw): the following is not needed since it is required on the referenced component -->
+                                    <!--      <!-\- CHANGED (BJR): Added component-type for alignment with system-component -\->
+                  <flag ref="component-type" required="yes" />
+            -->
+                                    <!-- The following is commented because this is not being used and can be inferred based on the type of the component -->
+                                    <!--
+                  <define-flag name="use">
+                     <formal-name>Implementation Use Type</formal-name>
+                     <description>The type of implementation</description>
+                     <constraint>
+                        <allowed-values allow-other="yes">
+                           <enum value="runs-software">The implemented component is a 'software' component that the inventory item has installed and uses.</enum>
+                           <enum value="uses-hardware">The implemented component is a 'hardware' component that the inventory item has installed and uses.</enum>
+                           <enum value="enforces-policy">The implemented component is a 'policy' component that the inventory item supports and enforces.</enum>
+                           <enum value="implements-process">The implemented component is a 'process' component that the inventory item supports and enforces.</enum>
+                        </allowed-values>
+                     </constraint>
+                  </define-flag>
+            -->
                         <model>
                               <assembly ref="property" max-occurs="unbounded">
                                     <group-as name="props" in-json="ARRAY"/>

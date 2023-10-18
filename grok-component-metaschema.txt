@@ -524,7 +524,7 @@ Constraints are hard to understand.
             <assembly>"control" (an array of controls)
     </model>
     <contraint>(a couple of "allowed values" constraints)
-</define-assembly "import-component-definition">
+</define-assembly> "import-component-definition"
 
 <define-assembly>"control"
     <define-flag>"id" (this one is a Token, because externally-managed)
@@ -538,3 +538,4 @@ Constraints are hard to understand.
         <assembly>"control" (an array of controls)
     </model>  
     <contraint>(a large number of "allowed values" constraints, an index definition, several "expected values")
+<define-assembly> {"control"}

@@ -97,7 +97,7 @@ Constraints are hard to understand.
     </model>
 </define-assembly> {metadata}
 
-// yes, they really to define both a 
+// yes, they really do define both a 
 // field and a flag with the same name
 <define-flag>location-uuid (uuid)
 <define-field>location-uuid (uuid)

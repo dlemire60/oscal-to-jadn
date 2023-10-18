@@ -336,6 +336,14 @@ Constraints are hard to understand.
 //**********  structures from the Component metaschema ******************//
 //***********************************************************************//
 
+<define-assembly>"incorporates-component"   // Incorporates Component: The collection of components comprising this capability.
+    <define-flag>component-uuid : uuid      // Component Reference: A machine-oriented identifier reference to a component
+    <model>
+        <define-field>description : multiline-markup  // Component Description: A description of the component, including information about its function.
+    </model>
+</define-assembly> {"incorporates-component"}
+
+
 <define-assembly>"control-implementation"   // Control Implementation Set:  Defines how the component or capability supports a set of controls.
     <define-flag>uuid : uuid              // Control Implementation Set Identifier: Provides a means to identify a set of control implementations that are supported by a given component or capability.
     <define-flag>source : uri-reference   // Source Resource Reference: A reference to an OSCAL catalog or profile providing the referenced control or subcontrol definition.

@@ -231,7 +231,7 @@
          <p>Capabilities are expressed by combining one or more components.</p>-->
                   <p>When defining a <code>service</code> component where are relationship to other components is known, one or more <code>link</code> entries with rel values of provided-by and used-by can be used to link to the specific component identifier(s) that provide and use the service respectively.</p>
             </remarks>
-      </define-assembly>
+      </define-assembly> <!-- "system-component" -->
 
       <define-flag name="system-component-type" as-type="string">
             <formal-name>Component Type</formal-name>
@@ -244,7 +244,7 @@
                         <enum value="network">A physical or virtual network.</enum>
                   </allowed-values>
             </constraint>
-      </define-flag>
+      </define-flag> <!-- "system-component-type" -->
 
       <define-assembly name="protocol">
             <formal-name>Service Protocol Information</formal-name>
@@ -276,7 +276,8 @@
                         <message>It is a best practice to provide a UUID.</message>
                   </expect>
             </constraint>
-      </define-assembly>
+      </define-assembly>  <!-- "protocol" -->
+
       <define-assembly name="port-range">
             <formal-name>Port Range</formal-name>
             <description>Where applicable this is the IPv4 port range on which the service operates.</description>
@@ -329,7 +330,7 @@
                         </protocol>
                   </service>
             </example>
-      </define-assembly>
+      </define-assembly> <!-- "port-range" -->
 
       <define-assembly name="implementation-status">
             <formal-name>Implementation Status</formal-name>
@@ -350,7 +351,7 @@
             <model>
                   <field ref="remarks" in-xml="WITH_WRAPPER" min-occurs="0" max-occurs="1"/>
             </model>
-      </define-assembly>
+      </define-assembly> <!-- "implementation-status" -->
 
       <!-- ############################################# -->
       <!-- # The System User and supporting constructs # -->
@@ -413,7 +414,8 @@
             <remarks>
                   <p>Permissible values to be determined closer to the application, such as by a receiving authority.</p>
             </remarks>
-      </define-assembly>
+      </define-assembly> <!-- "system-user" -->
+
       <define-assembly name="authorized-privilege">
             <formal-name>Privilege</formal-name>
             <description>Identifies a specific system privilege held by the user, along with an associated description and/or rationale for the privilege.</description>
@@ -430,11 +432,12 @@
                         <group-as name="functions-performed" in-json="ARRAY"/>
                   </field>
             </model>
-      </define-assembly>
+      </define-assembly> <!-- "authorized-privilege" -->
+
       <define-field name="function-performed" as-type="string">
             <formal-name>Functions Performed</formal-name>
             <description>Describes a function performed for a given authorized privilege by this user class.</description>
-      </define-field>
+      </define-field> <!-- "function-performed" -->
 
       <!-- ################################################ -->
       <!-- # The Inventory Item and supporting constructs # -->
@@ -442,8 +445,7 @@
       <define-assembly name="inventory-item">
             <formal-name>Inventory Item</formal-name>
             <description>A single managed inventory item within the system.</description>
-            <!--      <json-key flag-name="uuid"/>
--->
+            <!--      <json-key flag-name="uuid"/>   -->
             <define-flag name="uuid" as-type="uuid" required="yes">
                   <formal-name>Inventory Item Universally Unique Identifier</formal-name>
                   <!-- Identifier Declaration -->
@@ -454,7 +456,7 @@
          <!-\- This is an id because the idenfier is assigned and managed externally. -\->
          <formal-name>Asset Identifier</formal-name>
          <description>Organizational asset identifier that is unique in the context of the system. This may be a reference to the identifier used in an asset tracking system or a vulnerability scanning tool.</description>
-      </define-flag>  -->
+            </define-flag>  -->
             <model>
                   <define-field name="description" as-type="markup-multiline" min-occurs="1" in-xml="WITH_WRAPPER">
                         <formal-name>Inventory Item Description</formal-name>
@@ -616,7 +618,7 @@
                         </remarks>
                   </is-unique>
             </constraint>
-      </define-assembly>
+      </define-assembly> <!-- "inventory-item" -->
 
 
 
@@ -656,7 +658,8 @@
             <formal-name>Control Statement Reference</formal-name>
             <!-- Identifier Reference -->
             <description>A <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#human-oriented">human-oriented</a> identifier reference to a <code>control statement</code>.</description>
-      </define-flag>
+      </define-flag> <!-- "statement-id" -->
+
       <define-assembly name="set-parameter">
             <formal-name>Set Parameter Value</formal-name>
             <description>Identifies the parameter that will be set by the enclosed value.</description>
@@ -670,7 +673,7 @@
                   </define-field>
                   <field ref="remarks" in-xml="WITH_WRAPPER"/>
             </model>
-      </define-assembly>
+      </define-assembly> <!-- "set-parameter" -->
 
       <!-- ===== FIELDS ===== -->
       <define-field name="system-id" as-type="string">
@@ -701,7 +704,7 @@
                         <p>This value must be an <a href="https://pages.nist.gov/OSCAL/concepts/uri-use/#absolute-uri">absolute URI</a> that serves as a <a href="https://pages.nist.gov/OSCAL/concepts/uri-use/#use-as-a-naming-system-identifier">naming system identifier</a>.</p>
                   </remarks>
             </define-flag>
-      </define-field>
+      </define-field> <!-- "system-id" -->
 
       <!-- ===== FLAGS ===== -->
       <define-flag name="param-id" as-type="token">
@@ -714,5 +717,5 @@
                         <enum>System ISSO</enum>
                   </set-param>
             </example>
-      </define-flag>
+      </define-flag> <!-- "param-id" -->
 </METASCHEMA>

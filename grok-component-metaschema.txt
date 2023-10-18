@@ -6,11 +6,22 @@ imported from control-common metaschema. Metadata, back-matter, and several
 Constraints are hard to understand.
 
 
-<import href="oscal_metadata_metaschema.xml"/>
+// the following import chains to import
+//  - oscal_metadata_metaschema.xml
+//  - oscal_control_common_metaschema.xml
+// 
+// those two files are also imported by the Catalog and Profile metaschemas
+
+<import href="oscal_implementation_common_metaschema.xml"/>
 
 //****************************************************************************//
-//*************  structures from the Metadata metaschema *********************//
 //****************************************************************************//
+//*************                                           ********************//
+//*************  structures from the Metadata metaschema  ********************//
+//*************                                           ********************//
+//****************************************************************************//
+//****************************************************************************//
+
 
 <define-assembly>"metadata"  (complex structure, common to all OSCAL layers)
     <model>
@@ -249,7 +260,11 @@ Constraints are hard to understand.
 <import href="oscal_control-common_metaschema.xml"/>
 
 //****************************************************************************//
-//**********  structures from the Control Common metaschema ******************//
+//****************************************************************************//
+//**********                                                 *****************//
+//**********  structures from the Control Common metaschema  *****************//
+//**********                                                 *****************//
+//****************************************************************************//
 //****************************************************************************//
 
 <define-assembly>"part"
@@ -333,7 +348,11 @@ Constraints are hard to understand.
 <define-assembly>"include-all"  (what does this construct actually do??????)
 
 //***********************************************************************//
-//**********  structures from the Component metaschema ******************//
+//***********************************************************************//
+//**********                                            *****************//
+//**********  structures from the Component metaschema  *****************//
+//**********                                            *****************//
+//***********************************************************************//
 //***********************************************************************//
 
 

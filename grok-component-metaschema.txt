@@ -337,6 +337,11 @@ Constraints are hard to understand.
 //***********************************************************************//
 
 
+<define-assembly>"import-component-definition"  // Import Component Definition: Loads a component definition from another resource.
+    <define-flag>href : uri-reference           // Hyperlink Reference: A link to a resource that defines a set of components and/or capabilities to import into this collection.
+</define-assembly> {"import=component-definition"}
+
+
 <define-assembly>"defined-component"    // Component: A defined component that can be part of an implemented system.
     <define-flag>uuid : uuid            // Component Identifier: Provides a globally unique means to identify a given component.
     <flag>type : defined-component-type
@@ -352,7 +357,7 @@ Constraints are hard to understand.
         <field>remarks : string
     </model>
 
-// need to work out how to apply the various constraints on this type in JADN-speak
+// TO-DO:  need to work out how to apply the various constraints on this type in JADN-speak
 
 </define-assembly> {"defined-component"}
 

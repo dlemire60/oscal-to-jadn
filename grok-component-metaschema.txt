@@ -1,6 +1,6 @@
 Trying to grok the Component metaschema. Below is the top level structure 
-(vastly simplifying their syntax). This model defines assemblies for Catalog, 
-Group, and Control. Part, Parameter, and Control-related constructs are 
+(vastly simplifying their syntax). This model defines assemblies for {{fill in}}.
+ Part, Parameter, and Control-related constructs are 
 imported from control-common metaschema. Metadata, back-matter, and several 
 "utility", constructs are imported from the metadata metaschema. At first blush,
 Constraints are hard to understand.
@@ -84,7 +84,7 @@ Constraints are hard to understand.
         <assembly>actions  ArrayOf(action)
         <field>remarks
     </model>
-</define-assembly>metadata
+</define-assembly> {metadata}
 
 // yes, they really to define both a 
 // field and a flag with the same name
@@ -124,7 +124,7 @@ Constraints are hard to understand.
             </model>
         </define-assembly>
     </model>
-</define-assembly>back-matter
+</define-assembly> {back-matter}
 
 <define-assembly>property
     <flag>name (token)
@@ -136,7 +136,7 @@ Constraints are hard to understand.
     <model>
         <field>remarks
     </model>
-</define-assembly>property
+</define-assembly> {property}
 
 <define-assembly>link
     <flag>href (uri-reference)
@@ -146,7 +146,7 @@ Constraints are hard to understand.
     <model>
         <field>text (markup-line)
     </model>
-</define-assembly>link
+</define-assembly> {link}
 
 
 <define-assembly>"responsible-party"
@@ -157,7 +157,7 @@ Constraints are hard to understand.
         <assembly>links ArrayOf(link)
         <field>remarks
     </model>
-</define-assembly>"responsible-party"
+</define-assembly> {}"responsible-party"}
 
 <define-assembly>"action"
     <flag>uuid (uuid)
@@ -170,7 +170,7 @@ Constraints are hard to understand.
         <assembly>responsible-parties ArrayOf(responsible-party)
         <field>remarks
     </model>
-</define-assembly>"action"
+</define-assembly> {}"action"}
 
 <define-assembly>"responsible-role"
     <flag>role-id (token)
@@ -180,7 +180,7 @@ Constraints are hard to understand.
         <field>party-uuids ArrayOf(party-uuid)
         <field>remarks
     </model>
-</define-assembly>"responsible-role"
+</define-assembly> {}"responsible-role"}
 
 
 // need to do some interpretation on the hash type
@@ -215,7 +215,7 @@ Constraints are hard to understand.
             (others allowed)
         </enumeration>
     </define-flag>"type"
-</define-field>"telephone-number"
+</define-field> {"telephone-number"}
 
 <define-assembly>"address"
     <flag>type (location-type)
@@ -226,7 +226,7 @@ Constraints are hard to understand.
         <field>postal-code (string?)
         <field>country  (string pattern "[A-Z]{2}")
     </model>
-</define-assembly>"address"
+</define-assembly> {"address"}
 
 <define-field>"addr-line" (string?)
 
@@ -236,7 +236,7 @@ Constraints are hard to understand.
         "work"
         (others allowed)
     </enumeration>
-</define-flag>"location-type"
+</define-flag> {"location-type"}
 
 <define-field>"document-id"
     <flag>scheme (uri)
@@ -244,7 +244,7 @@ Constraints are hard to understand.
             "http://www.doi.org"
             (others allowed)
         </enumeration>
-</define-field>"document-id"
+</define-field> {"document-id"}
 
 <import href="oscal_control-common_metaschema.xml"/>
 
@@ -265,7 +265,7 @@ Constraints are hard to understand.
         <assembly>"link" (an array of links)
     </model>
     <contraint>(an "allowed values" constraint)
-</define-assembly>
+</define-assembly> {"part"}
 
 
 <define-assembly>"parameter"
@@ -286,7 +286,7 @@ Constraints are hard to understand.
         <field>"remarks"
     </model>
     <contraint>(a couple of "allowed values" constraints, and an expected target)
-</define-assembly>
+</define-assembly> {"parameter"}
 
 
 <define-assembly>"parameter-constraint"
@@ -299,14 +299,14 @@ Constraints are hard to understand.
             </model>
         </define-assembly>
     </model>
-</define-assembly>
+</define-assembly> {"parameter-constraint"}
 
 
 <define-assembly>"parameter-guideline"
     <model>
         <define-field>"prose" (markup-multiline)
     </model>
-</define-assembly>
+</define-assembly> {"parameter-guideline"}
 
 
 <define-field>"parameter-value"  (no additional information with this)
@@ -324,13 +324,60 @@ Constraints are hard to understand.
     <model>
         <define-field>"choice" (array of markup-line)
     </model>
-<define-assembly>
+<define-assembly> {"parameter-selection"}
 
 
 <define-flag>"control-id" (token)
 
 
 <define-assembly>"include-all"  (what does this construct actually do??????)
+
+//***********************************************************************//
+//**********  structures from the Component metaschema ******************//
+//***********************************************************************//
+
+
+<define-assembly> "implemented-requirement"     // Control Implementation:  Describes how the containing component or capability implements an individual control.
+    <define-flag>"uuid" : uuid                 // Control Implementation Identifier
+    <flag>"control-id" : control-id
+    <model>
+        <define-field>"description" : multiline-markup  // Control Implementation Description: A suggestion from the supplier (e.g., component vendor or author) for how the specified control may be implemented if the containing component or capability is instantiated in a system security plan.
+        <assembly>props : ArrayOf(property)
+        <assembly>links : ArrayOf(link)
+        <assembly>set-parameters : ArrayOf(set-parameter)
+        <assembly>responsible-roles : ArrayOf(responsible-role)
+        <assembly>statements : ArrayOf(statement)
+        <constraint>Since multiple set-parameter entries can be provided, each parameter must be set only once.
+        <constraint>Since responsible-role associates multiple party-uuid entries with a single role-id, each role-id must be referenced only once.
+        <constraint>Since statement entries can be referenced using the statement's statement-id, each statement must be referenced only once.
+    </model>
+    <remarks>
+        <p>Implemented requirements within a component or capability in a component definition provide a means for component suppliers to suggest possible control implementation details, which may be used by a different party (e.g., component consumers) when authoring a system security plan. Thus, these requirements defined in a component definition are only a suggestion of how to implement, which may be adopted wholesale, changed, or ignored by a person defining an information system implementation.</p>
+        <p>Use of <code>set-parameter</code> in this context, sets the parameter for the referenced control and any associated statements.</p>
+    </remarks>
+</define-assembly> {"implemented-requirement"}
+
+<define-assembly>"statement"            // Control Statement Implementation: Identifies which statements within a control are addressed.
+    <flag>"statement-id" : string       // A reference to the specific implemented statement associated with a control.
+    <define-flag>"uuid"  : uuid         // Machine readable universal identifier
+    <model>
+    </model>
+        <define-field>"description" : multiline-markup  // Statement Implementation Description: A summary of how the containing control statement is implemented by the component or capability.
+        <assembly>props : ArrayOf(property)
+        <assembly>links : ArrayOf(link)
+        <assembly>responsible-roles : ArrayOf(responsible-role)
+        <field>"remarks" : string
+        <constraint>Since responsible-role associates multiple party-uuid entries with a single role-id, each role-id must be referenced only once.
+</define-assembly> {"statement"}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -349,7 +396,7 @@ Constraints are hard to understand.
         <assembly>"back-matter"
     </model>
     <contraint>(an index definition and a requirement for components within a capability to be unique)
-</define-assembly "component-definition">
+</define-assembly> {"component-definition"}
 
 <define-assembly>"import-component-definition"
     <define-flag>"href" (a uri-reference, A link to a resource that defines a set of components and/or capabilities to import into this collection.)
@@ -361,7 +408,7 @@ Constraints are hard to understand.
            <li>a bare URI fragment (i.e., `#uuid`) pointing to a <code>back-matter</code> resource in this or an imported document</li>
         </ol>
     </remarks>
-</define-assembly>"import-component-definition"
+</define-assembly> {"import-component-definition"}
 
     <define-flag>"class" (another Token)
     <model>

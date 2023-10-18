@@ -521,7 +521,7 @@
          <p>Implemented requirements within a component or capability in a component definition provide a means for component suppliers to suggest possible control implementation details, which may be used by a different party (e.g., component consumers) when authoring a system security plan. Thus, these requirements defined in a component definition are only a suggestion of how to implement, which may be adopted wholesale, changed, or ignored by a person defining an information system implementation.</p>
          <p>Use of <code>set-parameter</code> in this context, sets the parameter for the referenced control and any associated statements.</p>
       </remarks>
-   </define-assembly>
+   </define-assembly> "implemented-requirement"
 
    <define-assembly name="statement" scope="local">
       <formal-name>Control Statement Implementation</formal-name>
